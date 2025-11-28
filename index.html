@@ -19,6 +19,8 @@
       background: rgba(255,255,255,0.6);
       z-index: 0;
     }
+
+    /* HEADER + NAV (stesso stile prodotti) */
     .site-header {
       position: sticky; top:0; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
@@ -26,24 +28,53 @@
       background: rgba(255,128,0,0.9);
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-    .site-header .brand { display:flex; align-items:center; gap:12px; }
+    .site-header .brand {
+      display:flex; align-items:center; gap:12px;
+    }
     .site-header .brand img { width:50px; }
     .site-header .brand h1 {
       font-size:20px; color:#fff; letter-spacing:1px;
     }
-    nav {
+    .main-nav {
       display:flex; gap:24px;
       background: rgba(0,0,0,0.7);
       padding:8px 16px; border-radius:6px; z-index:11;
     }
-    nav a {
+    .main-nav a {
       color:#fff; text-decoration:none;
       padding:6px 12px; border-radius:4px;
       font-weight:500; transition:background .25s,transform .2s;
     }
-    nav a:hover {
+    .main-nav a:hover {
       background:#e67300; transform:translateY(-2px);
     }
+
+    .menu-toggle {
+      display:none;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:6px;
+      margin-left:auto;
+    }
+    .menu-toggle span {
+      display:block;
+      width:22px; height:2px;
+      background:#fff;
+      border-radius:999px;
+      margin:4px 0;
+      transition:transform .25s, opacity .25s, background .25s;
+    }
+    .site-header.open .menu-toggle span:nth-child(1) {
+      transform:translateY(6px) rotate(45deg);
+    }
+    .site-header.open .menu-toggle span:nth-child(2) {
+      opacity:0;
+    }
+    .site-header.open .menu-toggle span:nth-child(3) {
+      transform:translateY(-6px) rotate(-45deg);
+    }
+
     .container {
       position: relative; z-index:5;
       max-width:900px; margin:60px auto 20px;
@@ -60,6 +91,7 @@
       padding:12px 24px; background:#ff8000;
       color:#fff; font-weight:600; border-radius:6px;
       transition:background .3s;
+      text-decoration:none;
     }
     .btn-prodotti:hover { background:#e67300; }
     .contact-info {
@@ -102,21 +134,46 @@
     /* 🔽 Responsive */
     @media (max-width: 768px) {
       .site-header {
-        flex-direction: column;
-        align-items: flex-start;
         padding: 10px 15px;
       }
-      nav {
-        margin-top: 10px;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
+      .site-header .brand h1 {
+        font-size:16px;
       }
-      nav a {
-        display: block;
-        text-align: center;
-        width: 100%;
-        padding: 10px 16px;
+      .menu-toggle {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+      }
+      .main-nav {
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        margin-top:6px;
+        background:rgba(0,0,0,0.9);
+        padding:10px 16px 14px;
+        border-radius:0 0 10px 10px;
+        flex-direction:column;
+        gap:6px;
+        transform-origin:top;
+        transform:scaleY(0);
+        max-height:0;
+        opacity:0;
+        pointer-events:none;
+        transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s ease-out;
+      }
+      .site-header.open .main-nav {
+        transform:scaleY(1);
+        max-height:260px;
+        opacity:1;
+        pointer-events:auto;
+      }
+      .main-nav a {
+        display:block;
+        text-align:center;
+        width:100%;
+        padding:10px 12px;
       }
       .container {
         margin: 20px 10px;
@@ -136,7 +193,6 @@
     }
 
     @media (max-width: 480px) {
-      .site-header .brand h1 { font-size: 16px; }
       .container h2 { font-size: 20px; }
       .btn-prodotti {
         width: 100%;
@@ -153,7 +209,10 @@
       <img src="logoO.png" alt="Logo">
       <h1>Gianni Vetrugno</h1>
     </div>
-    <nav>
+    <button class="menu-toggle" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav">
       <a href="index.html">Home</a>
       <a href="prodotti.html">Prodotti</a>
       <a href="contatti.html">Contatti</a>
@@ -183,16 +242,31 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      const enableTransition = window.innerWidth > 1024; // SOLO PC grandi
+      const header = document.querySelector('.site-header');
+      const menuBtn = document.querySelector('.menu-toggle');
 
-      if (enableTransition && ov) {
+      if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          header.classList.toggle('open');
+        });
+      }
+
+      function canUseTransition() {
+        if (!ov) return false;
+        const style = window.getComputedStyle(ov);
+        return style.display !== 'none';
+      }
+
+      if (canUseTransition()) {
         ov.style.backgroundImage = "url('foto_aziendale.jpg')";
       }
 
-      document.querySelectorAll('nav a').forEach(a => {
+      document.querySelectorAll('.main-nav a').forEach(a => {
         a.addEventListener('click', e => {
-          // Su mobile/tablet nessuna animazione
-          if (!enableTransition || !ov) return;
+          // chiudi il menu mobile, se aperto
+          header.classList.remove('open');
+
+          if (!canUseTransition()) return; // su mobile/tablet nessuna animazione
 
           e.preventDefault();
           ov.classList.add('active');
