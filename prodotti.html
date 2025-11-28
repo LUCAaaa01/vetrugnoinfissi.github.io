@@ -57,6 +57,50 @@
       font-weight:500;
     }
 
+    /* Barra filtri materiali */
+    .filter-bar {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+      justify-content:flex-start;
+    }
+    .filter-btn {
+      border:none;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:0.9rem;
+      font-weight:600;
+      cursor:pointer;
+      background:rgba(0,0,0,0.05);
+      color:#444;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      box-shadow:0 1px 3px rgba(0,0,0,0.15);
+      transition:background .25s, transform .15s, box-shadow .25s, color .25s;
+      white-space:nowrap;
+    }
+    .filter-btn span.dot {
+      width:10px; height:10px;
+      border-radius:50%;
+      background:#ff8000;
+      opacity:0.6;
+    }
+    .filter-btn[data-filter="A"] span.dot { background:#ffb347; }  /* alluminio */
+    .filter-btn[data-filter="F"] span.dot { background:#666666; }  /* ferro */
+    .filter-btn[data-filter="P"] span.dot { background:#4da6ff; }  /* pvc  */
+    .filter-btn.active {
+      background:#ff8000;
+      color:#fff;
+      box-shadow:0 3px 8px rgba(0,0,0,0.25);
+      transform:translateY(-1px);
+    }
+    .filter-btn.active span.dot {
+      opacity:1;
+      background:#fff;
+    }
+
     .product-video {
       overflow:hidden; border-radius:6px;
       box-shadow:0 4px 8px rgba(0,0,0,0.1);
@@ -76,6 +120,13 @@
       box-shadow:0 4px 8px rgba(0,0,0,0.1);
       background:#fff;
       display:block;
+      opacity:1;
+      transition:opacity .2s ease-out, transform .2s ease-out;
+    }
+    .product.hidden {
+      opacity:0;
+      transform:scale(0.98);
+      display:none;
     }
     .product img {
       width:100%; height:auto;
@@ -85,6 +136,26 @@
       cursor:pointer;
     }
     .product img:hover { transform:scale(1.02); }
+
+    .product-label {
+      padding:8px 10px 10px;
+      font-size:0.8rem;
+      color:#666;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .chip {
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:0.7rem;
+      background:#f5f5f5;
+      color:#555;
+    }
+    .chip.A { border:1px solid #ffb347; }
+    .chip.F { border:1px solid #666666; }
+    .chip.P { border:1px solid #4da6ff; }
+    .chip.X { border:1px solid #cccccc; }
 
     .lightbox {
       display:none; position:fixed; top:0; left:0;
@@ -114,7 +185,7 @@
     @media(max-width:768px) { .product-gallery { column-count:2; } }
     @media(max-width:480px) { .product-gallery { column-count:1; } }
 
-    /* 🔽 Responsive */
+    /* 🔽 Responsive header + container */
     @media (max-width: 768px) {
       .site-header {
         flex-direction: column;
@@ -137,8 +208,12 @@
         margin: 20px 10px;
         padding: 20px;
       }
+      .filter-bar {
+        gap:8px;
+      }
     }
 
+    /* Su mobile/tablet niente overlay transizione */
     @media (max-width: 1024px) {
       #page-transition {
         display:none !important;
@@ -170,7 +245,7 @@
     <p>Scopri la nostra gamma di infissi in alluminio, ferro e PVC. Ogni prodotto è realizzato con materiali di alta qualità per garantirti durata e sicurezza.</p>
 
     <div class="section-intro">
-      Guarda il video introduttivo e continua a scoprire i nostri lavori nella galleria fotografica qui sotto
+      Guarda il video introduttivo e continua a scoprire i nostri lavori nella galleria fotografica qui sotto.
     </div>
 
     <div class="product-video">
@@ -181,27 +256,124 @@
       </video>
     </div>
 
+    <!-- FILTRO MATERIALI (solo singole categorie) -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">
+        <span class="dot"></span> Tutti i prodotti
+      </button>
+      <button class="filter-btn" data-filter="A">
+        <span class="dot"></span> Alluminio
+      </button>
+      <button class="filter-btn" data-filter="F">
+        <span class="dot"></span> Ferro
+      </button>
+      <button class="filter-btn" data-filter="P">
+        <span class="dot"></span> PVC
+      </button>
+    </div>
+
+    <!-- GALLERIA PRODOTTI CON NUOVI NOMI -->
     <div class="product-gallery">
-      <div class="product"><img src="im1.jpg" alt="Prodotto 1"></div>
-      <div class="product"><img src="im2.jpg" alt="Prodotto 2"></div>
-      <div class="product"><img src="im3.jpg" alt="Prodotto 3"></div>
-      <div class="product"><img src="im4.jpg" alt="Prodotto 4"></div>
-      <div class="product"><img src="im5.jpg" alt="Prodotto 5"></div>
-      <div class="product"><img src="im6.jpg" alt="Prodotto 6"></div>
-      <div class="product"><img src="im7.jpg" alt="Prodotto 7"></div>
-      <div class="product"><img src="im8.jpg" alt="Prodotto 8"></div>
-      <div class="product"><img src="im9.jpg" alt="Prodotto 9"></div>
-      <div class="product"><img src="im10.jpg" alt="Prodotto 10"></div>
-      <div class="product"><img src="im11.jpg" alt="Prodotto 11"></div>
-      <div class="product"><img src="im12.jpg" alt="Prodotto 12"></div>
-      <div class="product"><img src="im13.jpg" alt="Prodotto 13"></div>
-      <div class="product"><img src="im14.jpg" alt="Prodotto 14"></div>
-      <div class="product"><img src="im15.jpg" alt="Prodotto 15"></div>
-      <div class="product"><img src="im16.jpg" alt="Prodotto 16"></div>
-      <div class="product"><img src="im17.jpg" alt="Prodotto 17"></div>
-      <div class="product"><img src="im18.jpg" alt="Prodotto 18"></div>
-      <div class="product"><img src="im19.jpg" alt="Prodotto 19"></div>
-      <div class="product"><img src="im20.jpg" alt="Prodotto 20"></div>
+      <!-- imAF12 -->
+      <div class="product">
+        <img src="imAF12.jpg" alt="Infisso in alluminio e ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF13 -->
+      <div class="product">
+        <img src="imF13.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF14 -->
+      <div class="product">
+        <img src="imF14.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF15 -->
+      <div class="product">
+        <img src="imF15.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF16 -->
+      <div class="product">
+        <img src="imF16.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF17 -->
+      <div class="product">
+        <img src="imF17.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imP18 -->
+      <div class="product">
+        <img src="imP18.jpg" alt="Infisso in PVC">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF19 -->
+      <div class="product">
+        <img src="imF19.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- im20 (nessuna lettera -> solo "Tutti i prodotti") -->
+      <div class="product">
+        <img src="im20.jpg" alt="Infisso">
+        <div class="product-label"></div>
+      </div>
+      <!-- imA3 -->
+      <div class="product">
+        <img src="imA3.jpg" alt="Infisso in alluminio">
+        <div class="product-label"></div>
+      </div>
+      <!-- imA10 -->
+      <div class="product">
+        <img src="imA10.jpg" alt="Infisso in alluminio">
+        <div class="product-label"></div>
+      </div>
+      <!-- imAF1 -->
+      <div class="product">
+        <img src="imAF1.jpg" alt="Infisso in alluminio e ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imAP8 -->
+      <div class="product">
+        <img src="imAP8.jpg" alt="Infisso in alluminio e PVC">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF2 -->
+      <div class="product">
+        <img src="imF2.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF4 -->
+      <div class="product">
+        <img src="imF4.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF5 -->
+      <div class="product">
+        <img src="imF5.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF7 -->
+      <div class="product">
+        <img src="imF7.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imF9 -->
+      <div class="product">
+        <img src="imF9.jpg" alt="Infisso in ferro">
+        <div class="product-label"></div>
+      </div>
+      <!-- imP6 -->
+      <div class="product">
+        <img src="imP6.jpg" alt="Infisso in PVC">
+        <div class="product-label"></div>
+      </div>
+      <!-- imP11 -->
+      <div class="product">
+        <img src="imP11.jpg" alt="Infisso in PVC">
+        <div class="product-label"></div>
+      </div>
     </div>
   </section>
 
@@ -213,22 +385,27 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      const enableTransition = window.innerWidth > 1024; // solo PC grandi
 
-      if (enableTransition && ov) {
+      function canUseTransition() {
+        if (!ov) return false;
+        const style = window.getComputedStyle(ov);
+        return style.display !== 'none';
+      }
+
+      if (canUseTransition()) {
         ov.style.backgroundImage = "url('foto_aziendale.jpg')";
       }
 
       document.querySelectorAll('nav a').forEach(a=>{
         a.addEventListener('click', e=>{
-          if (!enableTransition || !ov) return;
-
+          if (!canUseTransition()) return;
           e.preventDefault();
           ov.classList.add('active');
           setTimeout(()=> location.href = a.href, 600);
         });
       });
 
+      // LIGHTBOX
       document.querySelectorAll('.product img').forEach(img=>{
         img.addEventListener('click', ()=>{
           const lb = document.getElementById('lightbox');
@@ -238,6 +415,83 @@
       });
       document.querySelector('.lightbox .close').addEventListener('click', ()=>{
         document.getElementById('lightbox').style.display = 'none';
+      });
+
+      // --- LOGICA MATERIALI IN BASE AL NOME FILE ---
+      const products = document.querySelectorAll('.product');
+
+      products.forEach(card => {
+        const img = card.querySelector('img');
+        const src = img.getAttribute('src');      // es: imAF12.jpg
+        const match = src.match(/^im([AFP]+)\d+/);
+        let mats = [];
+        if (match && match[1]) {
+          const code = match[1];
+          if (code.includes('A')) mats.push('A');
+          if (code.includes('F')) mats.push('F');
+          if (code.includes('P')) mats.push('P');
+        }
+        // se non c'è alcuna lettera -> solo in "Tutti i prodotti"
+        if (mats.length === 0) {
+          card.dataset.materials = '';
+        } else {
+          card.dataset.materials = mats.join(',');
+        }
+
+        // etichette sotto le immagini
+        const label = card.querySelector('.product-label');
+        label.innerHTML = '';
+        if (mats.includes('A')) {
+          const chipA = document.createElement('span');
+          chipA.className = 'chip A';
+          chipA.textContent = 'Alluminio';
+          label.appendChild(chipA);
+        }
+        if (mats.includes('F')) {
+          const chipF = document.createElement('span');
+          chipF.className = 'chip F';
+          chipF.textContent = 'Ferro';
+          label.appendChild(chipF);
+        }
+        if (mats.includes('P')) {
+          const chipP = document.createElement('span');
+          chipP.className = 'chip P';
+          chipP.textContent = 'PVC';
+          label.appendChild(chipP);
+        }
+        if (mats.length === 0) {
+          const chipX = document.createElement('span');
+          chipX.className = 'chip X';
+          chipX.textContent = 'Qualsiasi materiale';
+          label.appendChild(chipX);
+        }
+      });
+
+      function matchMaterials(materials, filterCode) {
+        if (filterCode === 'all') return true;
+        if (!materials) return false; // immagini senza codice: solo in "Tutti"
+        const matsArr = materials.split(',');
+        // per A, F o P basta che il materiale sia presente
+        return matsArr.includes(filterCode);
+      }
+
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          products.forEach(card => {
+            const mats = card.dataset.materials || '';
+            if (filter === 'all' || matchMaterials(mats, filter)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
       });
     })();
   </script>
