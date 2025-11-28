@@ -137,10 +137,14 @@
         margin: 20px 10px;
         padding: 20px;
       }
+    }
+
+    @media (max-width: 1024px) {
       #page-transition {
-        display:none;
+        display:none !important;
       }
     }
+
     @media (max-width: 480px) {
       .site-header .brand h1 { font-size: 16px; }
       .section-intro { font-size: 1rem; }
@@ -209,15 +213,15 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const enableTransition = window.innerWidth > 1024; // solo PC grandi
 
-      if (!isMobile && ov) {
+      if (enableTransition && ov) {
         ov.style.backgroundImage = "url('foto_aziendale.jpg')";
       }
 
       document.querySelectorAll('nav a').forEach(a=>{
         a.addEventListener('click', e=>{
-          if (isMobile || !ov) return;
+          if (!enableTransition || !ov) return;
 
           e.preventDefault();
           ov.classList.add('active');
