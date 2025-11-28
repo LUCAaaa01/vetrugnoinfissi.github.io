@@ -131,11 +131,14 @@
         display: block;
         text-align: center;
         width: 100%;
-        padding: 10px 16px; /* tap più comodo su mobile */
+        padding: 10px 16px;
       }
       .container {
         margin: 20px 10px;
         padding: 20px;
+      }
+      #page-transition {
+        display:none;
       }
     }
     @media (max-width: 480px) {
@@ -175,26 +178,26 @@
     </div>
 
     <div class="product-gallery">
-      <div class="product"><img src="im1.jpg" alt="Prodotto 1" loading="lazy"></div>
-      <div class="product"><img src="im2.jpg" alt="Prodotto 2" loading="lazy"></div>
-      <div class="product"><img src="im3.jpg" alt="Prodotto 3" loading="lazy"></div>
-      <div class="product"><img src="im4.jpg" alt="Prodotto 4" loading="lazy"></div>
-      <div class="product"><img src="im5.jpg" alt="Prodotto 5" loading="lazy"></div>
-      <div class="product"><img src="im6.jpg" alt="Prodotto 6" loading="lazy"></div>
-      <div class="product"><img src="im7.jpg" alt="Prodotto 7" loading="lazy"></div>
-      <div class="product"><img src="im8.jpg" alt="Prodotto 8" loading="lazy"></div>
-      <div class="product"><img src="im9.jpg" alt="Prodotto 9" loading="lazy"></div>
-      <div class="product"><img src="im10.jpg" alt="Prodotto 10" loading="lazy"></div>
-      <div class="product"><img src="im11.jpg" alt="Prodotto 11" loading="lazy"></div>
-      <div class="product"><img src="im12.jpg" alt="Prodotto 12" loading="lazy"></div>
-      <div class="product"><img src="im13.jpg" alt="Prodotto 13" loading="lazy"></div>
-      <div class="product"><img src="im14.jpg" alt="Prodotto 14" loading="lazy"></div>
-      <div class="product"><img src="im15.jpg" alt="Prodotto 15" loading="lazy"></div>
-      <div class="product"><img src="im16.jpg" alt="Prodotto 16" loading="lazy"></div>
-      <div class="product"><img src="im17.jpg" alt="Prodotto 17" loading="lazy"></div>
-      <div class="product"><img src="im18.jpg" alt="Prodotto 18" loading="lazy"></div>
-      <div class="product"><img src="im19.jpg" alt="Prodotto 19" loading="lazy"></div>
-      <div class="product"><img src="im20.jpg" alt="Prodotto 20" loading="lazy"></div>
+      <div class="product"><img src="im1.jpg" alt="Prodotto 1"></div>
+      <div class="product"><img src="im2.jpg" alt="Prodotto 2"></div>
+      <div class="product"><img src="im3.jpg" alt="Prodotto 3"></div>
+      <div class="product"><img src="im4.jpg" alt="Prodotto 4"></div>
+      <div class="product"><img src="im5.jpg" alt="Prodotto 5"></div>
+      <div class="product"><img src="im6.jpg" alt="Prodotto 6"></div>
+      <div class="product"><img src="im7.jpg" alt="Prodotto 7"></div>
+      <div class="product"><img src="im8.jpg" alt="Prodotto 8"></div>
+      <div class="product"><img src="im9.jpg" alt="Prodotto 9"></div>
+      <div class="product"><img src="im10.jpg" alt="Prodotto 10"></div>
+      <div class="product"><img src="im11.jpg" alt="Prodotto 11"></div>
+      <div class="product"><img src="im12.jpg" alt="Prodotto 12"></div>
+      <div class="product"><img src="im13.jpg" alt="Prodotto 13"></div>
+      <div class="product"><img src="im14.jpg" alt="Prodotto 14"></div>
+      <div class="product"><img src="im15.jpg" alt="Prodotto 15"></div>
+      <div class="product"><img src="im16.jpg" alt="Prodotto 16"></div>
+      <div class="product"><img src="im17.jpg" alt="Prodotto 17"></div>
+      <div class="product"><img src="im18.jpg" alt="Prodotto 18"></div>
+      <div class="product"><img src="im19.jpg" alt="Prodotto 19"></div>
+      <div class="product"><img src="im20.jpg" alt="Prodotto 20"></div>
     </div>
   </section>
 
@@ -206,14 +209,22 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      ov.style.backgroundImage = "url('foto_aziendale.jpg')";
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+      if (!isMobile && ov) {
+        ov.style.backgroundImage = "url('foto_aziendale.jpg')";
+      }
+
       document.querySelectorAll('nav a').forEach(a=>{
         a.addEventListener('click', e=>{
+          if (isMobile || !ov) return;
+
           e.preventDefault();
           ov.classList.add('active');
           setTimeout(()=> location.href = a.href, 600);
         });
       });
+
       document.querySelectorAll('.product img').forEach(img=>{
         img.addEventListener('click', ()=>{
           const lb = document.getElementById('lightbox');
