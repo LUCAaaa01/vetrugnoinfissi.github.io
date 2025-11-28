@@ -18,6 +18,7 @@
       background:rgba(255,255,255,0.6); z-index:0;
     }
 
+    /* HEADER + NAV (uguale alle altre pagine) */
     .site-header {
       position:sticky; top:0; z-index:10;
       display:flex; align-items:center; justify-content:space-between;
@@ -29,18 +30,44 @@
     .site-header .brand h1 {
       font-size:20px; color:#fff; letter-spacing:1px;
     }
-    nav {
+    .main-nav {
       display:flex; gap:24px;
       background:rgba(0,0,0,0.7); padding:8px 16px;
       border-radius:6px; z-index:11;
     }
-    nav a {
+    .main-nav a {
       color:#fff; text-decoration:none;
       padding:6px 12px; border-radius:4px;
       font-weight:500; transition:background .25s,transform .2s;
     }
-    nav a:hover {
+    .main-nav a:hover {
       background:#e67300; transform:translateY(-2px);
+    }
+
+    .menu-toggle {
+      display:none;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:6px;
+      margin-left:auto;
+    }
+    .menu-toggle span {
+      display:block;
+      width:22px; height:2px;
+      background:#fff;
+      border-radius:999px;
+      margin:4px 0;
+      transition:transform .25s, opacity .25s, background .25s;
+    }
+    .site-header.open .menu-toggle span:nth-child(1) {
+      transform:translateY(6px) rotate(45deg);
+    }
+    .site-header.open .menu-toggle span:nth-child(2) {
+      opacity:0;
+    }
+    .site-header.open .menu-toggle span:nth-child(3) {
+      transform:translateY(-6px) rotate(-45deg);
     }
 
     .contact-page {
@@ -103,7 +130,7 @@
       position:fixed; width:80vw; height:80vh;
       top:10vh; left:10vw;
       background-size:cover; background-position:center;
-      opacity:0; transform:rotate(-30deg) scale(.7);
+      opacity:0; transform:rotate(-30deg) scale(0.7);
       transition:opacity .6s, transform .6s;
       z-index:20; border-radius:12px;
       box-shadow:0 0 20px rgba(0,0,0,0.3);
@@ -116,21 +143,44 @@
     /* 🔽 Responsive */
     @media (max-width: 768px) {
       .site-header {
-        flex-direction: column;
-        align-items: flex-start;
         padding: 10px 15px;
       }
-      nav {
-        margin-top: 10px;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
+      .site-header .brand h1 { font-size: 16px; }
+      .menu-toggle {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
       }
-      nav a {
-        display: block;
-        text-align: center;
-        width: 100%;
-        padding: 10px 16px;
+      .main-nav {
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        margin-top:6px;
+        background:rgba(0,0,0,0.9);
+        padding:10px 16px 14px;
+        border-radius:0 0 10px 10px;
+        flex-direction:column;
+        gap:6px;
+        transform-origin:top;
+        transform:scaleY(0);
+        max-height:0;
+        opacity:0;
+        pointer-events:none;
+        transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s ease-out;
+      }
+      .site-header.open .main-nav {
+        transform:scaleY(1);
+        max-height:260px;
+        opacity:1;
+        pointer-events:auto;
+      }
+      .main-nav a {
+        display:block;
+        text-align:center;
+        width:100%;
+        padding:10px 12px;
       }
       .contact-page {
         margin: 20px 10px;
@@ -145,7 +195,6 @@
     }
 
     @media (max-width: 480px) {
-      .site-header .brand h1 { font-size: 16px; }
       .contact-page h2 { font-size: 20px; }
       .contact-email input,
       .contact-email textarea,
@@ -164,7 +213,10 @@
       <img src="logoO.png" alt="Logo">
       <h1>Gianni Vetrugno</h1>
     </div>
-    <nav>
+    <button class="menu-toggle" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav">
       <a href="index.html">Home</a>
       <a href="prodotti.html">Prodotti</a>
       <a href="contatti.html">Contatti</a>
@@ -174,13 +226,13 @@
   <section class="contact-page">
     <h2>Come puoi contattarci?</h2>
 
-    <p><strong>Indirizzo:</strong> Via Sara Librando 15, Zona Industriale, Carmiano (LE), 73041</p>
+    <p><strong>Indirizzo:</strong> Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
     <p><strong>Telefono:</strong> 0832 603525 | 338 907 6275</p>
 
     <p><strong>Orari di apertura:</strong></p>
     <ul>
-      <li>Lunedì–Venerdì: 07:30–15:30</li>
-      <li>Sabato: 07:30–13:00</li>
+      <li>Lunedì–Venerdì: 07:00–15:30</li>
+      <li>Sabato: Chiuso</li>
     </ul>
 
     <p>Seguici su  
@@ -213,16 +265,30 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      const enableTransition = window.innerWidth > 1024; // solo PC grandi
+      const header = document.querySelector('.site-header');
+      const menuBtn = document.querySelector('.menu-toggle');
 
-      if (enableTransition && ov) {
+      if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          header.classList.toggle('open');
+        });
+      }
+
+      function canUseTransition() {
+        if (!ov) return false;
+        const style = window.getComputedStyle(ov);
+        return style.display !== 'none';
+      }
+
+      if (canUseTransition()) {
         ov.style.backgroundImage = "url('foto_aziendale.jpg')";
       }
 
-      document.querySelectorAll('nav a').forEach(a => {
+      document.querySelectorAll('.main-nav a').forEach(a => {
         a.addEventListener('click', e => {
-          if (!enableTransition || !ov) return;
+          header.classList.remove('open');
 
+          if (!canUseTransition()) return;
           e.preventDefault();
           ov.classList.add('active');
           setTimeout(() => location.href = a.href, 600);
