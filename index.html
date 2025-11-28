@@ -20,7 +20,7 @@
       z-index: 0;
     }
 
-    /* HEADER + NAV (stesso stile prodotti) */
+    /* HEADER + NAV (uguale a prodotti/contatti) */
     .site-header {
       position: sticky; top:0; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
@@ -94,6 +94,7 @@
       text-decoration:none;
     }
     .btn-prodotti:hover { background:#e67300; }
+
     .contact-info {
       position: relative; z-index:5;
       background:#222; color:#eee;
@@ -185,7 +186,7 @@
       }
     }
 
-    /* Disattiva SEMPRE overlay sotto i 1024px (telefoni / tablet) */
+    /* Disattiva overlay sotto i 1024px (telefoni / tablet) */
     @media (max-width: 1024px) {
       #page-transition {
         display:none !important;
@@ -228,11 +229,11 @@
   </section>
 
   <div class="contact-info">
-    <p>📍 Via Sara Librando, Zona Industriale, Carmiano (LE), 73041</p>
+    <p>📍 Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
     <p>📞 0832 603525 / 338 907 6275</p>
     <ul>
-      <li>Lun–Ven: 07:30–15:30</li>
-      <li>Sabato: 07:30–13:00</li>
+      <li>Lunedì–Venerdì: 07:00–15:30</li>
+      <li>Sabato: Chiuso</li>
     </ul>
     <a href="https://www.facebook.com/your-page" target="_blank" rel="noopener">
       <img src="facebook.png" alt="FB" class="social-icon">Seguici su Facebook
@@ -263,10 +264,9 @@
 
       document.querySelectorAll('.main-nav a').forEach(a => {
         a.addEventListener('click', e => {
-          // chiudi il menu mobile, se aperto
           header.classList.remove('open');
 
-          if (!canUseTransition()) return; // su mobile/tablet nessuna animazione
+          if (!canUseTransition()) return;
 
           e.preventDefault();
           ov.classList.add('active');
