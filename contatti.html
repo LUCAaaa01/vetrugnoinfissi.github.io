@@ -18,7 +18,6 @@
       background:rgba(255,255,255,0.6); z-index:0;
     }
 
-    /* header & nav */
     .site-header {
       position:sticky; top:0; z-index:10;
       display:flex; align-items:center; justify-content:space-between;
@@ -44,7 +43,6 @@
       background:#e67300; transform:translateY(-2px);
     }
 
-    /* contenitore principale */
     .contact-page {
       position:relative; z-index:5;
       max-width:700px; margin:60px auto 20px;
@@ -71,7 +69,6 @@
       width:100%; height:350px; border:0; border-radius:6px;
     }
 
-    /* sezione email */
     .contact-email {
       background:#f9f9f9; padding:20px;
       border-radius:6px; margin-top:20px;
@@ -94,7 +91,6 @@
       background:#e67300;
     }
 
-    /* footer */
     footer {
       position:relative; z-index:5;
       background:#222; color:#ccc; text-align:center;
@@ -103,7 +99,7 @@
     footer a { color:#fff; text-decoration:none; }
     footer a:hover { opacity:.8; }
 
-    /* page transition overlay */
+    /* Overlay di transizione */
     #page-transition {
       position:fixed; width:80vw; height:80vh;
       top:10vh; left:10vw;
@@ -135,11 +131,14 @@
         display: block;
         text-align: center;
         width: 100%;
-        padding: 10px 16px; /* tap più comodo su mobile */
+        padding: 10px 16px;
       }
       .contact-page {
         margin: 20px 10px;
         padding: 20px;
+      }
+      #page-transition {
+        display:none;
       }
     }
     @media (max-width: 480px) {
@@ -183,19 +182,14 @@
 
     <p>Seguici su  
       <a href="https://www.facebook.com/your-page" target="_blank" rel="noopener">
-        <img src="facebook.png" alt="Facebook" class="social-icon" loading="lazy">Facebook
+        <img src="facebook.png" alt="Facebook" class="social-icon">Facebook
       </a>
     </p>
 
     <div class="map-container">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2890.9607651284186!2d18.046709675822896!3d40.33238171
-145326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134682a8d1dbcf11%3A0x6a9ec8b7bcbfa324!2sVetrugno%20Infissi!5e1!3m2!1sit!2sit!4v1757601514847!5m2!1sit!2sit" 
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2890.9607651284186!2d18.046709675822896!3d40.33238167145326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134682a8d1dbcf11%3A0x6a9ec8b7bcbfa324!2sVetrugno%20Infissi!5e1!3m2!1sit!2sit!4v1757601514847!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
-    <!-- SEZIONE EMAIL -->
     <div class="contact-email">
       <h3>Richiedi informazioni via email</h3>
       <form action="mailto:vetrugnogianni@virgilio.it" method="post" enctype="text/plain">
@@ -216,9 +210,16 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      ov.style.backgroundImage = "url('foto_aziendale.jpg')";
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+      if (!isMobile && ov) {
+        ov.style.backgroundImage = "url('foto_aziendale.jpg')";
+      }
+
       document.querySelectorAll('nav a').forEach(a => {
         a.addEventListener('click', e => {
+          if (isMobile || !ov) return;
+
           e.preventDefault();
           ov.classList.add('active');
           setTimeout(() => location.href = a.href, 600);
