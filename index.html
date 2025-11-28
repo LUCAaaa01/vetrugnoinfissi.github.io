@@ -84,7 +84,7 @@
     .contact-info a:hover { opacity:.8; }
     .social-icon { width:20px; margin-right:6px; }
 
-    /* Overlay di transizione */
+    /* Overlay transizione */
     #page-transition {
       position:fixed; width:80vw; height:80vh;
       top:10vh; left:10vw;
@@ -126,11 +126,15 @@
         flex-direction: column;
         gap: 6px;
       }
-      /* su mobile niente overlay di transizione */
+    }
+
+    /* Disattiva SEMPRE overlay sotto i 1024px (telefoni / tablet) */
+    @media (max-width: 1024px) {
       #page-transition {
-        display:none;
+        display:none !important;
       }
     }
+
     @media (max-width: 480px) {
       .site-header .brand h1 { font-size: 16px; }
       .container h2 { font-size: 20px; }
@@ -179,20 +183,20 @@
   <script>
     (function(){
       const ov = document.getElementById('page-transition');
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const enableTransition = window.innerWidth > 1024; // SOLO PC grandi
 
-      if (!isMobile && ov) {
+      if (enableTransition && ov) {
         ov.style.backgroundImage = "url('foto_aziendale.jpg')";
       }
 
-      document.querySelectorAll('nav a').forEach(a=> {
-        a.addEventListener('click', e=> {
-          // Su mobile: nessuna animazione, vai direttamente
-          if (isMobile || !ov) return;
+      document.querySelectorAll('nav a').forEach(a => {
+        a.addEventListener('click', e => {
+          // Su mobile/tablet nessuna animazione
+          if (!enableTransition || !ov) return;
 
           e.preventDefault();
           ov.classList.add('active');
-          setTimeout(()=> location.href = a.href, 600);
+          setTimeout(() => { location.href = a.href; }, 600);
         });
       });
     })();
