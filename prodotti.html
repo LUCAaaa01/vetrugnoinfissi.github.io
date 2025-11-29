@@ -261,6 +261,10 @@
       .filter-bar {
         gap:8px;
       }
+      .contact-info ul {
+        flex-direction: column;
+        gap: 6px;
+      }
     }
 
     /* Su mobile/tablet niente overlay transizione */
@@ -274,6 +278,29 @@
       .site-header .brand h1 { font-size: 16px; }
       .section-intro { font-size: 1rem; }
     }
+
+    /* BLOCCO NERO FINALE COME IN HOME */
+    .contact-info {
+      position: relative; z-index:5;
+      background:#222; color:#eee;
+      padding:20px; text-align:center;
+      margin-top:40px; border-top:4px solid #ff8000;
+    }
+    .contact-info p, .contact-info ul { margin:8px 0; font-size:15px; }
+    .contact-info ul {
+      list-style:none; display:inline-flex; gap:20px;
+    }
+    .contact-info ul li::before {
+      content:"🕒"; margin-right:6px;
+    }
+    .contact-info a {
+      display:inline-flex; align-items:center;
+      color:#fff; text-decoration:none;
+      margin-top:8px; font-size:15px;
+      transition:opacity .2s;
+    }
+    .contact-info a:hover { opacity:.8; }
+    .social-icon { width:20px; margin-right:6px; }
   </style>
 </head>
 <body>
@@ -383,6 +410,19 @@
 
     </div>
   </section>
+
+  <!-- BLOCCO NERO COME IN HOME -->
+  <div class="contact-info">
+    <p>📍 Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
+    <p>📞 0832 603525 / 338 907 6275</p>
+    <ul>
+      <li>Lunedì–Venerdì: 07:00–15:30</li>
+      <li>Sabato: Chiuso</li>
+    </ul>
+    <a href="https://www.facebook.com/profile.php?id=100057478958756" target="_blank" rel="noopener">
+      <img src="facebook.png" alt="FB" class="social-icon">Seguici su Facebook
+    </a>
+  </div>
 
   <div class="lightbox" id="lightbox">
     <span class="close">&times;</span>
