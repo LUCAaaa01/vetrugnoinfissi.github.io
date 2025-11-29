@@ -140,6 +140,28 @@
       opacity:1; transform:rotate(0) scale(1);
     }
 
+    /* BLOCCO NERO COME IN HOME/PRODOTTI */
+    .contact-info {
+      position: relative; z-index:5;
+      background:#222; color:#eee;
+      padding:20px; text-align:center;
+      margin-top:40px; border-top:4px solid #ff8000;
+    }
+    .contact-info p, .contact-info ul { margin:8px 0; font-size:15px; }
+    .contact-info ul {
+      list-style:none; display:inline-flex; gap:20px;
+    }
+    .contact-info ul li::before {
+      content:"🕒"; margin-right:6px;
+    }
+    .contact-info a {
+      display:inline-flex; align-items:center;
+      color:#fff; text-decoration:none;
+      margin-top:8px; font-size:15px;
+      transition:opacity .2s;
+    }
+    .contact-info a:hover { opacity:.8; }
+
     /* 🔽 Responsive */
     @media (max-width: 768px) {
       .site-header {
@@ -168,7 +190,7 @@
         max-height:0;
         opacity:0;
         pointer-events:none;
-        transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s ease-out;
+        transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s.ease_out;
       }
       .site-header.open .main-nav {
         transform:scaleY(1);
@@ -185,6 +207,10 @@
       .contact-page {
         margin: 20px 10px;
         padding: 20px;
+      }
+      .contact-info ul {
+        flex-direction: column;
+        gap: 6px;
       }
     }
 
@@ -257,10 +283,25 @@
 
   </section>
 
+<<<<<<< Updated upstream
   <footer>
     © 2025 Gianni Vetrugno Infissi — 
     <a href="https://www.facebook.com/profile.php?id=100057478958756" target="_blank" rel="noopener">Facebook</a>
   </footer>
+=======
+  <!-- BLOCCO NERO COME HOME/PRODOTTI -->
+  <div class="contact-info">
+    <p>📍 Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
+    <p>📞 0832 603525 / 338 907 6275</p>
+    <ul>
+      <li>Lunedì–Venerdì: 07:00–15:30</li>
+      <li>Sabato: Chiuso</li>
+    </ul>
+    <a href="https://www.facebook.com/profile.php?id=100057478958756" target="_blank" rel="noopener">
+      <img src="facebook.png" alt="FB" class="social-icon">Seguici su Facebook
+    </a>
+  </div>
+>>>>>>> Stashed changes
 
   <script>
     (function(){
