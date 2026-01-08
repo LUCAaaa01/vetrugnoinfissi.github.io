@@ -11,24 +11,30 @@
   </script>
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contatti e Preventivi Infissi a Carmiano (Lecce) | Gianni Vetrugno</title>
-  
+   
   <meta name="description" content="Richiedi un preventivo gratuito per i tuoi nuovi infissi. Vieni a trovarci a Carmiano (LE) in Via Sara Librando 14 o chiamaci al 0832 603525.">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
+    
     body {
       font-family:"Segoe UI",sans-serif;
       color:#333;
       min-height:100vh;
       background:url('base.jpg') center/cover no-repeat;
+      /* MODIFICA FONDAMENTALE PER IL FOOTER */
+      display: flex;
+      flex-direction: column;
     }
+    
     body::before {
       content:""; position:fixed; top:0; left:0;
       width:100%; height:100%;
       background:rgba(255,255,255,0.6); z-index:0;
     }
 
-    /* HEADER + NAV (uguale alle altre pagine) */
+    /* HEADER + NAV */
     .site-header {
       position:sticky; top:0; z-index:10;
       display:flex; align-items:center; justify-content:space-between;
@@ -85,6 +91,8 @@
       max-width:700px; margin:60px auto 20px;
       background:#fff; padding:30px; border-radius:8px;
       box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      /* Assicura che la larghezza sia gestita bene nel flex */
+      width: 100%; 
     }
     .contact-page h2 {
       text-align:center; color:#ff8000;
@@ -128,6 +136,7 @@
       background:#e67300;
     }
 
+    /* Questo blocco 'footer' non è usato nell'HTML ma lo lascio per non rompere nulla */
     footer {
       position:relative; z-index:5;
       background:#222; color:#ccc; text-align:center;
@@ -155,7 +164,9 @@
       position: relative; z-index:5;
       background:#222; color:#eee;
       padding:20px; text-align:center;
-      margin-top:40px; border-top:4px solid #ff8000;
+      border-top:4px solid #ff8000;
+      /* MODIFICA: margin-top auto spinge il footer in fondo alla pagina */
+      margin-top: auto; 
     }
     .contact-info p, .contact-info ul { margin:8px 0; font-size:15px; }
     .contact-info ul {
@@ -215,8 +226,9 @@
         padding:10px 12px;
       }
       .contact-page {
-        margin: 20px 10px;
+        margin: 20px 10px; /* ridotto margine laterale */
         padding: 20px;
+        width: auto; /* reset larghezza su mobile */
       }
       .contact-info ul {
         flex-direction: column;
@@ -293,7 +305,6 @@
 
   </section>
 
-  <!-- BLOCCO NERO COME HOME/PRODOTTI -->
   <div class="contact-info">
     <p>📍 Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
     <p>📞 0832 603525 / 338 907 6275</p>
@@ -343,5 +354,3 @@
 
 </body>
 </html>
-
-
