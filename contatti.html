@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZPHNC17Y4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-QZPHNC17Y4');
+    
+    if (localStorage.getItem('cookieConsent') === 'granted') {
+      gtag('consent', 'default', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
+    } else {
+      gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
+    }
   </script>
--->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZPHNC17Y4"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-QZPHNC17Y4', { 'anonymize_ip': true });
+  </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +43,6 @@
       background:rgba(255,255,255,0.6); z-index:0;
     }
 
-    /* HEADER + NAV */
     .site-header {
       position:sticky; top:0; z-index:10;
       display:flex; align-items:center; justify-content:space-between;
@@ -46,9 +51,7 @@
     }
     .site-header .brand { display:flex; align-items:center; gap:12px; }
     .site-header .brand img { width:50px; }
-    .site-header .brand h1 {
-      font-size:20px; color:#fff; letter-spacing:1px;
-    }
+    .site-header .brand h1 { font-size:20px; color:#fff; letter-spacing:1px; }
     .main-nav {
       display:flex; gap:24px;
       background:rgba(0,0,0,0.7); padding:8px 16px;
@@ -59,9 +62,7 @@
       padding:6px 12px; border-radius:4px;
       font-weight:500; transition:background .25s,transform .2s;
     }
-    .main-nav a:hover {
-      background:#e67300; transform:translateY(-2px);
-    }
+    .main-nav a:hover { background:#e67300; transform:translateY(-2px); }
 
     .menu-toggle {
       display:none;
@@ -79,150 +80,56 @@
       margin:4px 0;
       transition:transform .25s, opacity .25s, background .25s;
     }
-    .site-header.open .menu-toggle span:nth-child(1) {
-      transform:translateY(6px) rotate(45deg);
-    }
-    .site-header.open .menu-toggle span:nth-child(2) {
-      opacity:0;
-    }
-    .site-header.open .menu-toggle span:nth-child(3) {
-      transform:translateY(-6px) rotate(-45deg);
-    }
+    .site-header.open .menu-toggle span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+    .site-header.open .menu-toggle span:nth-child(2) { opacity:0; }
+    .site-header.open .menu-toggle span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
 
-    .contact-page {
-      position:relative; z-index:5;
-      max-width:700px; margin:60px auto 20px;
-      background:#fff; padding:30px; border-radius:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      width: 100%; 
-    }
-    .contact-page h2 {
-      text-align:center; color:#ff8000;
-      margin-bottom:20px; font-size:26px;
-    }
-    .contact-page p, .contact-page ul {
-      margin-bottom:14px; line-height:1.6; font-size:15px;
-    }
+    .contact-page { position:relative; z-index:5; max-width:700px; margin:60px auto 20px; background:#fff; padding:30px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); width: 100%; }
+    .contact-page h2 { text-align:center; color:#ff8000; margin-bottom:20px; font-size:26px; }
+    .contact-page p, .contact-page ul { margin-bottom:14px; line-height:1.6; font-size:15px; }
     .contact-page ul { list-style:none; padding-left:0; }
-    .contact-page ul li::before {
-      content:"✓"; color:#ff8000; margin-right:8px;
-    }
+    .contact-page ul li::before { content:"✓"; color:#ff8000; margin-right:8px; }
     .social-icon { width:20px; vertical-align:middle; margin-right:6px; }
 
-    .map-container {
-      text-align:center; margin:20px 0;
-    }
-    .map-container iframe {
-      width:100%; height:350px; border:0; border-radius:6px;
-    }
+    .map-container { text-align:center; margin:20px 0; }
+    .map-container iframe { width:100%; height:350px; border:0; border-radius:6px; }
 
-    .contact-email {
-      background:#f9f9f9; padding:20px;
-      border-radius:6px; margin-top:20px;
-    }
-    .contact-email h3 {
-      margin-bottom:15px; color:#ff8000;
-    }
-    .contact-email input,
-    .contact-email textarea {
-      width:100%; padding:10px; margin-bottom:10px;
-      border:1px solid #ccc; border-radius:4px;
-      font-size:14px;
-    }
-    .contact-email button {
-      background:#ff8000; color:#fff;
-      padding:10px 18px; border:none; border-radius:4px;
-      cursor:pointer; transition:background .3s;
-    }
-    .contact-email button:hover {
-      background:#e67300;
-    }
+    .contact-email { background:#f9f9f9; padding:20px; border-radius:6px; margin-top:20px; }
+    .contact-email h3 { margin-bottom:15px; color:#ff8000; }
+    .contact-email input, .contact-email textarea { width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:4px; font-size:14px; }
+    .contact-email button { background:#ff8000; color:#fff; padding:10px 18px; border:none; border-radius:4px; cursor:pointer; transition:background .3s; }
+    .contact-email button:hover { background:#e67300; }
 
-    /* Footer generico */
-    footer {
-      position:relative; z-index:5;
-      background:#222; color:#ccc; text-align:center;
-      padding:15px; margin-top:40px; font-size:14px;
-    }
-    footer a { color:#fff; text-decoration:none; }
-    footer a:hover { opacity:.8; }
-
-    #page-transition {
-      position:fixed; width:80vw; height:80vh;
-      top:10vh; left:10vw;
-      background-size:cover; background-position:center;
-      opacity:0; transform:rotate(-30deg) scale(0.7);
-      transition:opacity .6s, transform .6s;
-      z-index:20; border-radius:12px;
-      box-shadow:0 0 20px rgba(0,0,0,0.3);
-      pointer-events:none;
-    }
-    #page-transition.active {
-      opacity:1; transform:rotate(0) scale(1);
-    }
-
-    /* BLOCCO NERO FINALE */
-    .contact-info {
-      position: relative; z-index:5;
-      background:#222; color:#eee;
-      padding:20px; text-align:center;
-      border-top:4px solid #ff8000;
-      margin-top: auto; 
-    }
+    .contact-info { position: relative; z-index:5; background:#222; color:#eee; padding:20px; text-align:center; border-top:4px solid #ff8000; margin-top: auto; }
     .contact-info p, .contact-info ul { margin:8px 0; font-size:15px; }
-    .contact-info ul {
-      list-style:none; display:inline-flex; gap:20px;
-    }
-    .contact-info ul li::before {
-      content:"🕒"; margin-right:6px;
-    }
-    .contact-info a {
-      display:inline-flex; align-items:center;
-      color:#fff; text-decoration:none;
-      margin-top:8px; font-size:15px;
-      transition:opacity .2s;
-    }
+    .contact-info ul { list-style:none; display:inline-flex; gap:20px; }
+    .contact-info ul li::before { content:"🕒"; margin-right:6px; }
+    .contact-info a { display:inline-flex; align-items:center; color:#fff; text-decoration:none; margin-top:8px; font-size:15px; transition:opacity .2s; }
     .contact-info a:hover { opacity:.8; }
 
-    /* 🔽 Responsive */
     @media (max-width: 768px) {
       .site-header { padding: 10px 15px; }
       .site-header .brand h1 { font-size: 16px; }
       .menu-toggle { display:flex; flex-direction:column; justify-content:center; align-items:center; }
-      
-      .main-nav {
-        position:absolute; top:100%; left:0; right:0; margin-top:6px;
-        background:rgba(0,0,0,0.9);
-        padding:10px 16px 14px;
-        border-radius:0 0 10px 10px;
-        flex-direction:column; gap:6px;
-        transform-origin:top; transform:scaleY(0);
-        max-height:0; opacity:0; pointer-events:none;
-        transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s ease-out;
-      }
-      .site-header.open .main-nav {
-        transform:scaleY(1); max-height:260px; opacity:1; pointer-events:auto;
-      }
+      .main-nav { position:absolute; top:100%; left:0; right:0; margin-top:6px; background:rgba(0,0,0,0.9); padding:10px 16px 14px; border-radius:0 0 10px 10px; flex-direction:column; gap:6px; transform-origin:top; transform:scaleY(0); max-height:0; opacity:0; pointer-events:none; transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s ease-out; }
+      .site-header.open .main-nav { transform:scaleY(1); max-height:260px; opacity:1; pointer-events:auto; }
       .main-nav a { display:block; text-align:center; width:100%; padding:10px 12px; }
-      
       .contact-page { margin: 20px 10px; padding: 20px; width: auto; }
       .contact-info ul { flex-direction: column; gap: 6px; }
     }
 
-    @media (max-width: 1024px) {
-      #page-transition { display:none !important; }
-    }
-
-    @media (max-width: 480px) {
-      .contact-page h2 { font-size: 20px; }
-      .contact-email input, .contact-email textarea, .contact-email button { font-size: 14px; }
-    }
+    #cookie-banner { position: fixed; bottom: 20px; left: 20px; right: 20px; background: #fff; color: #333; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-radius: 8px; z-index: 99999; display: none; align-items: center; justify-content: space-between; border-top: 4px solid #ff8000; }
+    #cookie-banner p { margin: 0; font-size: 14px; line-height: 1.5; flex: 1; margin-right: 20px; }
+    #cookie-banner a { color: #ff8000; text-decoration: underline; }
+    .cb-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+    .cb-btn { padding: 12px 22px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 12px; text-transform: uppercase; }
+    .cb-accept { background: #ff8000; color: white; animation: pulse-orange 2s infinite; }
+    @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 128, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 128, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 128, 0, 0); } }
+    .cb-reject { background: #eee; color: #555; }
+    @media (max-width: 600px) { #cookie-banner { flex-direction: column; text-align: center; bottom: 10px; left: 10px; right: 10px; padding: 15px; } #cookie-banner p { margin-right: 0; margin-bottom: 15px; } .cb-buttons { width: 100%; flex-direction: column; } .cb-btn { width: 100%; } }
   </style>
 </head>
 <body>
-
-  <div id="page-transition"></div>
-
   <header class="site-header">
     <div class="brand">
       <img src="logoO.png" alt="Logo">
@@ -240,44 +147,16 @@
 
   <section class="contact-page">
     <h2>Come puoi contattarci?</h2>
-
     <p><strong>Indirizzo:</strong> Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
     <p><strong>Telefono:</strong> 0832 603525 | 338 907 6275</p>
-
     <p><strong>Orari di apertura:</strong></p>
     <ul>
       <li>Lunedì–Venerdì: 07:00–15:30</li>
       <li>Sabato: Chiuso</li>
     </ul>
-
-    <p>Seguici su  
-      <a href="https://www.facebook.com/profile.php?id=100057478958756" target="_blank" rel="noopener">
-        <img src="facebook.png" alt="Facebook" class="social-icon">Facebook
-      </a>
-    </p>
-
-    <div class="map-container">
-      <iframe 
-        src="https://maps.google.com/maps?q=Gianni+Vetrugno+Infissi,+Via+Sara+Librando+14,+Carmiano&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-        width="100%" 
-        height="350" 
-        style="border:0; border-radius:6px;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-
-    <div class="contact-email">
-      <h3>Richiedi informazioni via email</h3>
-      <form action="mailto:vetrugnogianni@virgilio.it" method="post" enctype="text/plain">
-        <input type="text" name="Nome" placeholder="Il tuo nome" required>
-        <input type="email" name="Email" placeholder="La tua email" required>
-        <textarea name="Messaggio" rows="5" placeholder="Il tuo messaggio" required></textarea>
-        <button type="submit">Invia Messaggio</button>
-      </form>
-    </div>
-
+    <p>Seguici su <a href="https://www.facebook.com/profile.php?id=100057478958756" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook" class="social-icon">Facebook</a></p>
+    <div class="map-container"><iframe src="https://maps.google.com/maps?q=Gianni+Vetrugno+Infissi,+Via+Sara+Librando+14,+Carmiano&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="350" style="border:0; border-radius:6px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="contact-email"><h3>Richiedi informazioni via email</h3><form action="mailto:vetrugnogianni@virgilio.it" method="post" enctype="text/plain"><input type="text" name="Nome" placeholder="Il tuo nome" required><input type="email" name="Email" placeholder="La tua email" required><textarea name="Messaggio" rows="5" placeholder="Il tuo messaggio" required></textarea><button type="submit">Invia Messaggio</button></form></div>
   </section>
 
   <div class="contact-info">
@@ -292,40 +171,37 @@
     </a>
   </div>
 
+  <div id="cookie-banner">
+    <p><b>Gianni Vetrugno Infissi</b> usa i cookie per analizzare il traffico del sito in modo anonimo. <br><a href="privacy.html">Leggi la Privacy Policy</a></p>
+    <div class="cb-buttons">
+      <button onclick="acceptCookies()" class="cb-btn cb-accept">Accetta tutto</button>
+      <button onclick="rejectCookies()" class="cb-btn cb-reject">Solo necessari</button>
+    </div>
+  </div>
+
   <script>
+    const banner = document.getElementById('cookie-banner');
+    if (!localStorage.getItem('cookieConsent')) {
+      setTimeout(() => { banner.style.display = 'flex'; }, 800);
+    }
+
+    function acceptCookies() {
+      localStorage.setItem('cookieConsent', 'granted');
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      banner.style.display = 'none';
+      location.reload(); 
+    }
+
+    function rejectCookies() {
+      localStorage.setItem('cookieConsent', 'denied');
+      banner.style.display = 'none';
+    }
+
     (function(){
-      const ov = document.getElementById('page-transition');
       const header = document.querySelector('.site-header');
       const menuBtn = document.querySelector('.menu-toggle');
-
-      if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
-          header.classList.toggle('open');
-        });
-      }
-
-      function canUseTransition() {
-        if (!ov) return false;
-        const style = window.getComputedStyle(ov);
-        return style.display !== 'none';
-      }
-
-      if (canUseTransition()) {
-        ov.style.backgroundImage = "url('foto_aziendale.jpg')";
-      }
-
-      document.querySelectorAll('.main-nav a').forEach(a => {
-        a.addEventListener('click', e => {
-          header.classList.remove('open');
-
-          if (!canUseTransition()) return;
-          e.preventDefault();
-          ov.classList.add('active');
-          setTimeout(() => location.href = a.href, 600);
-        });
-      });
+      if (menuBtn) { menuBtn.addEventListener('click', () => { header.classList.toggle('open'); }); }
     })();
   </script>
-
 </body>
 </html>
