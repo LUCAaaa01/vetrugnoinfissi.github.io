@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZPHNC17Y4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZPHNC17Y4');
+  </script>
+-->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contatti – Gianni Vetrugno</title>
+  <title>Contatti e Preventivi Infissi a Carmiano (Lecce) | Gianni Vetrugno</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="favicon.png">
+   
+  <meta name="description" content="Richiedi un preventivo gratuito per i tuoi nuovi infissi. Vieni a trovarci a Carmiano (LE) in Via Sara Librando 14 o chiamaci al 0832 603525.">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
+    
     body {
       font-family:"Segoe UI",sans-serif;
       color:#333;
       min-height:100vh;
       background:url('base.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
     }
+    
     body::before {
       content:""; position:fixed; top:0; left:0;
       width:100%; height:100%;
       background:rgba(255,255,255,0.6); z-index:0;
     }
 
-    /* HEADER + NAV (uguale alle altre pagine) */
+    /* HEADER + NAV */
     .site-header {
       position:sticky; top:0; z-index:10;
       display:flex; align-items:center; justify-content:space-between;
@@ -75,6 +94,7 @@
       max-width:700px; margin:60px auto 20px;
       background:#fff; padding:30px; border-radius:8px;
       box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      width: 100%; 
     }
     .contact-page h2 {
       text-align:center; color:#ff8000;
@@ -118,6 +138,7 @@
       background:#e67300;
     }
 
+    /* Footer generico */
     footer {
       position:relative; z-index:5;
       background:#222; color:#ccc; text-align:center;
@@ -140,12 +161,13 @@
       opacity:1; transform:rotate(0) scale(1);
     }
 
-    /* BLOCCO NERO COME IN HOME/PRODOTTI */
+    /* BLOCCO NERO FINALE */
     .contact-info {
       position: relative; z-index:5;
       background:#222; color:#eee;
       padding:20px; text-align:center;
-      margin-top:40px; border-top:4px solid #ff8000;
+      border-top:4px solid #ff8000;
+      margin-top: auto; 
     }
     .contact-info p, .contact-info ul { margin:8px 0; font-size:15px; }
     .contact-info ul {
@@ -164,69 +186,36 @@
 
     /* 🔽 Responsive */
     @media (max-width: 768px) {
-      .site-header {
-        padding: 10px 15px;
-      }
+      .site-header { padding: 10px 15px; }
       .site-header .brand h1 { font-size: 16px; }
-      .menu-toggle {
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-      }
+      .menu-toggle { display:flex; flex-direction:column; justify-content:center; align-items:center; }
+      
       .main-nav {
-        position:absolute;
-        top:100%;
-        left:0;
-        right:0;
-        margin-top:6px;
+        position:absolute; top:100%; left:0; right:0; margin-top:6px;
         background:rgba(0,0,0,0.9);
         padding:10px 16px 14px;
         border-radius:0 0 10px 10px;
-        flex-direction:column;
-        gap:6px;
-        transform-origin:top;
-        transform:scaleY(0);
-        max-height:0;
-        opacity:0;
-        pointer-events:none;
+        flex-direction:column; gap:6px;
+        transform-origin:top; transform:scaleY(0);
+        max-height:0; opacity:0; pointer-events:none;
         transition:transform .22s ease-out, opacity .22s ease-out, max-height .22s ease-out;
       }
       .site-header.open .main-nav {
-        transform:scaleY(1);
-        max-height:260px;
-        opacity:1;
-        pointer-events:auto;
+        transform:scaleY(1); max-height:260px; opacity:1; pointer-events:auto;
       }
-      .main-nav a {
-        display:block;
-        text-align:center;
-        width:100%;
-        padding:10px 12px;
-      }
-      .contact-page {
-        margin: 20px 10px;
-        padding: 20px;
-      }
-      .contact-info ul {
-        flex-direction: column;
-        gap: 6px;
-      }
+      .main-nav a { display:block; text-align:center; width:100%; padding:10px 12px; }
+      
+      .contact-page { margin: 20px 10px; padding: 20px; width: auto; }
+      .contact-info ul { flex-direction: column; gap: 6px; }
     }
 
     @media (max-width: 1024px) {
-      #page-transition {
-        display:none !important;
-      }
+      #page-transition { display:none !important; }
     }
 
     @media (max-width: 480px) {
       .contact-page h2 { font-size: 20px; }
-      .contact-email input,
-      .contact-email textarea,
-      .contact-email button {
-        font-size: 14px;
-      }
+      .contact-email input, .contact-email textarea, .contact-email button { font-size: 14px; }
     }
   </style>
 </head>
@@ -268,7 +257,15 @@
     </p>
 
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2890.9607651284186!2d18.046709675822896!3d40.33238167145326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134682a8d1dbcf11%3A0x6a9ec8b7bcbfa324!2sVetrugno%20Infissi!5e1!3m2!1sit!2sit!4v1757601514847!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe 
+        src="https://maps.google.com/maps?q=Gianni+Vetrugno+Infissi,+Via+Sara+Librando+14,+Carmiano&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+        width="100%" 
+        height="350" 
+        style="border:0; border-radius:6px;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
 
     <div class="contact-email">
@@ -283,7 +280,6 @@
 
   </section>
 
-  <!-- BLOCCO NERO COME HOME/PRODOTTI -->
   <div class="contact-info">
     <p>📍 Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
     <p>📞 0832 603525 / 338 907 6275</p>
