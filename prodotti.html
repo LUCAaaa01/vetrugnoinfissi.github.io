@@ -4,165 +4,81 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    
     if (localStorage.getItem('cookieConsent') === 'granted') {
       gtag('consent', 'default', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
     } else {
       gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
     }
   </script>
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZPHNC17Y4"></script>
   <script>
     gtag('js', new Date());
     gtag('config', 'G-QZPHNC17Y4', { 'anonymize_ip': true });
   </script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <title>Infissi in Alluminio, Ferro e PVC | Catalogo Gianni Vetrugno</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="favicon.png">
-   
   <meta name="description" content="Scopri la nostra gamma di serramenti: persiane in alluminio certificate, infissi a taglio termico, porte in PVC, zanzariere, cancelli e grate di sicurezza.">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-    
     body {
-      font-family:"Segoe UI",sans-serif;
-      color:#333;
-      min-height:100vh;
-      background:url('base.jpg') top center repeat-y;
-      background-size:100% auto;
-      display: flex;
-      flex-direction: column;
+      font-family:"Segoe UI",sans-serif; color:#333; min-height:100vh;
+      background:url('base.jpg') top center repeat-y; background-size:100% auto;
+      display: flex; flex-direction: column;
     }
-    
     body::before {
-      content:""; position:fixed; top:0; left:0;
-      width:100%; height:100%;
+      content:""; position:fixed; top:0; left:0; width:100%; height:100%;
       background:rgba(255,255,255,0.6); z-index:0;
     }
-
     .site-header {
-      position:sticky; top:0; z-index:10;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 30px; background:rgba(255,128,0,0.9);
-      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between;
+      padding:10px 30px; background:rgba(255,128,0,0.9); box-shadow:0 2px 6px rgba(0,0,0,0.2);
     }
     .site-header .brand { display:flex; align-items:center; gap:12px; }
     .site-header .brand img { width:50px; }
     .site-header .brand h1 { font-size:20px; color:#fff; letter-spacing:1px; }
     .main-nav {
-      display:flex; gap:24px;
-      background:rgba(0,0,0,0.7); padding:8px 16px;
-      border-radius:6px; z-index:11;
+      display:flex; gap:24px; background:rgba(0,0,0,0.7); padding:8px 16px; border-radius:6px; z-index:11;
     }
-    .main-nav a {
-      color:#fff; text-decoration:none;
-      padding:6px 12px; border-radius:4px;
-      font-weight:500; transition:background .25s,transform .2s;
-    }
+    .main-nav a { color:#fff; text-decoration:none; padding:6px 12px; border-radius:4px; font-weight:500; transition:background .25s,transform .2s; }
     .main-nav a:hover { background:#e67300; transform:translateY(-2px); }
-
-    .menu-toggle {
-      display:none;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-      padding:6px;
-      margin-left:auto;
-    }
-    .menu-toggle span {
-      display:block;
-      width:22px; height:2px;
-      background:#fff;
-      border-radius:999px;
-      margin:4px 0;
-      transition:transform .25s, opacity .25s, background .25s;
-    }
+    .menu-toggle { display:none; background:transparent; border:none; cursor:pointer; padding:6px; margin-left:auto; }
+    .menu-toggle span { display:block; width:22px; height:2px; background:#fff; border-radius:999px; margin:4px 0; transition:transform .25s, opacity .25s, background .25s; }
     .site-header.open .menu-toggle span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
     .site-header.open .menu-toggle span:nth-child(2) { opacity:0; }
     .site-header.open .menu-toggle span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
-
-    .container {
-      position:relative; z-index:5;
-      max-width:1100px;
-      margin:60px auto 20px;
-      background:#fff; border-radius:8px;
-      padding:30px; box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      width: 100%; 
-    }
+    .container { position:relative; z-index:5; max-width:1100px; margin:60px auto 20px; background:#fff; border-radius:8px; padding:30px; box-shadow:0 4px 12px rgba(0,0,0,0.1); width: 100%; }
     .container p { margin-bottom:16px; line-height:1.6; }
-
-    .section-intro {
-      text-align:center;
-      margin:20px 0 30px;
-      font-size:1.2rem;
-      color:#444;
-      font-weight:500;
-    }
-
-    .filter-bar {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom:25px;
-      justify-content:flex-start;
-    }
-    .filter-btn {
-      border:none;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:0.9rem;
-      font-weight:600;
-      cursor:pointer;
-      background:rgba(0,0,0,0.05);
-      color:#444;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      box-shadow:0 1px 3px rgba(0,0,0,0.15);
-      transition:background .25s, transform .15s, box-shadow .25s, color .25s;
-      white-space:nowrap;
-    }
+    .section-intro { text-align:center; margin:20px 0 30px; font-size:1.2rem; color:#444; font-weight:500; }
+    .filter-bar { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:25px; justify-content:flex-start; }
+    .filter-btn { border:none; padding:8px 14px; border-radius:999px; font-size:0.9rem; font-weight:600; cursor:pointer; background:rgba(0,0,0,0.05); color:#444; display:flex; align-items:center; gap:6px; box-shadow:0 1px 3px rgba(0,0,0,0.15); transition:background .25s, transform .15s, box-shadow .25s, color .25s; white-space:nowrap; }
     .filter-btn span.dot { width:10px; height:10px; border-radius:50%; background:#ff8000; opacity:0.6; }
     .filter-btn[data-filter="A"] span.dot { background:#ffb347; }
     .filter-btn[data-filter="F"] span.dot { background:#666666; }
     .filter-btn[data-filter="P"] span.dot { background:#4da6ff; }
     .filter-btn.active { background:#ff8000; color:#fff; box-shadow:0 3px 8px rgba(0,0,0,0.25); transform:translateY(-1px); }
     .filter-btn.active span.dot { opacity:1; background:#fff; }
-
-    .product-video {
-      overflow:hidden; border-radius:6px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.1);
-      margin-bottom:30px; background:#000;
-    }
+    .product-video { overflow:hidden; border-radius:6px; box-shadow:0 4px 8px rgba(0,0,0,0.1); margin-bottom:30px; background:#000; }
     .product-video video { width:100%; display:block; border-radius:6px; }
-
     .product-gallery { column-count:3; column-gap:15px; }
     .product { break-inside:avoid; margin-bottom:15px; border-radius:6px; overflow:hidden; box-shadow:0 4px 8px rgba(0,0,0,0.1); background:#fff; display:block; opacity:1; transition:opacity .2s ease-out, transform .2s ease-out; }
     .product.hidden { opacity:0; transform:scale(0.98); display:none; }
     .product img { width:100%; height:auto; display:block; border-radius:6px; transition:transform .3s; cursor:pointer; }
     .product img:hover { transform:scale(1.02); }
-
     .product-label { padding:8px 10px 10px; font-size:0.8rem; color:#666; display:flex; flex-wrap:wrap; gap:6px; min-height: 0; }
     .chip { padding:2px 8px; border-radius:999px; font-size:0.7rem; background:#f5f5f5; color:#555; }
     .chip.A { border:1px solid #ffb347; }
     .chip.F { border:1px solid #666666; }
     .chip.P { border:1px solid #4da6ff; }
-
     .lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:20; }
     .lightbox-img { max-width:90%; max-height:90%; border-radius:6px; }
     .lightbox .close { position:absolute; top:20px; right:30px; font-size:32px; color:#fff; cursor:pointer; }
-
     #page-transition { position:fixed; width:80vw; height:80vh; top:10vh; left:10vw; background-size:cover; background-position:center; opacity:0; transform:rotate(-30deg) scale(.7); transition:opacity .6s, transform .6s; z-index:30; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.3); pointer-events:none; }
     #page-transition.active { opacity:1; transform:rotate(0) scale(1); }
-
     @media(max-width:768px) { .product-gallery { column-count:2; } }
     @media(max-width:480px) { .product-gallery { column-count:1; } }
-
     @media (max-width: 768px) {
       .site-header { padding: 10px 15px; }
       .site-header .brand h1 { font-size: 16px; }
@@ -173,9 +89,7 @@
       .container { margin: 20px 10px; padding: 20px; }
       .contact-info ul { flex-direction: column; gap: 6px; }
     }
-
     @media (max-width: 1024px) { #page-transition { display:none !important; } }
-
     .contact-info { position: relative; z-index:5; background:#222; color:#eee; padding:20px; text-align:center; border-top:4px solid #ff8000; margin-top: auto; }
     .contact-info p, .contact-info ul { margin:8px 0; font-size:15px; }
     .contact-info ul { list-style:none; display:inline-flex; gap:20px; }
@@ -183,7 +97,6 @@
     .contact-info a { display:inline-flex; align-items:center; color:#fff; text-decoration:none; margin-top:8px; font-size:15px; transition:opacity .2s; }
     .contact-info a:hover { opacity:.8; }
     .social-icon { width:20px; margin-right:6px; }
-
     #cookie-banner { position: fixed; bottom: 20px; left: 20px; right: 20px; background: #fff; color: #333; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-radius: 8px; z-index: 99999; display: none; align-items: center; justify-content: space-between; border-top: 4px solid #ff8000; }
     #cookie-banner p { margin: 0; font-size: 14px; line-height: 1.5; flex: 1; margin-right: 20px; }
     #cookie-banner a { color: #ff8000; text-decoration: underline; }
@@ -197,7 +110,6 @@
 </head>
 <body>
   <div id="page-transition"></div>
-
   <header class="site-header">
     <div class="brand">
       <img src="logoO.png" alt="Logo">
@@ -212,14 +124,9 @@
       <a href="contatti.html">Contatti</a>
     </nav>
   </header>
-
   <section class="container">
     <p>Scopri la nostra gamma di infissi in alluminio, ferro e PVC. Ogni prodotto è realizzato con materiali di alta qualità per garantirti durata e sicurezza.</p>
-
-    <div class="section-intro">
-      Guarda il video introduttivo e continua a scoprire i nostri lavori nella galleria fotografica qui sotto.
-    </div>
-
+    <div class="section-intro">Guarda il video introduttivo e continua a scoprire i nostri lavori nella galleria fotografica qui sotto.</div>
     <div class="product-video">
       <video muted loop playsinline controls preload="none" poster="foto_aziendale.jpg">
         <source src="Video_Expo_Stand.mp4" type="video/mp4">
@@ -227,22 +134,12 @@
         Il tuo browser non supporta il video HTML5.
       </video>
     </div>
-
     <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">
-        <span class="dot"></span> Tutti i prodotti
-      </button>
-      <button class="filter-btn" data-filter="A">
-        <span class="dot"></span> Alluminio
-      </button>
-      <button class="filter-btn" data-filter="F">
-        <span class="dot"></span> Ferro
-      </button>
-      <button class="filter-btn" data-filter="P">
-        <span class="dot"></span> PVC
-      </button>
+      <button class="filter-btn active" data-filter="all"><span class="dot"></span> Tutti i prodotti</button>
+      <button class="filter-btn" data-filter="A"><span class="dot"></span> Alluminio</button>
+      <button class="filter-btn" data-filter="F"><span class="dot"></span> Ferro</button>
+      <button class="filter-btn" data-filter="P"><span class="dot"></span> PVC</button>
     </div>
-
     <div class="product-gallery">
         <div class="product"><img src="imA29.webp" alt="Infisso"><div class="product-label"></div></div>
         <div class="product"><img src="imF15.webp" alt="Infisso"><div class="product-label"></div></div>
@@ -330,7 +227,6 @@
         <div class="product"><img src="imA23.webp" alt="Infisso"><div class="product-label"></div></div>
     </div>
   </section>
-
   <div class="contact-info">
     <p>📍 Via Sara Librando 14, Zona Industriale, Carmiano (LE), 73041</p>
     <p>📞 0832 603525 / 338 907 6275</p>
@@ -342,42 +238,34 @@
       <img src="facebook.png" alt="FB" class="social-icon">Seguici su Facebook
     </a>
   </div>
-
   <div id="cookie-banner">
-    <p>
-      <b>Gianni Vetrugno Infissi</b> usa i cookie per analizzare il traffico del sito in modo anonimo. <br>
-      <a href="privacy.html">Leggi la Privacy Policy</a>
-    </p>
+    <p><b>Gianni Vetrugno Infissi</b> usa i cookie per analizzare il traffico del sito in modo anonimo. <br><a href="privacy.html">Leggi la Privacy Policy</a></p>
     <div class="cb-buttons">
       <button onclick="acceptCookies()" class="cb-btn cb-accept">Accetta tutto</button>
       <button onclick="rejectCookies()" class="cb-btn cb-reject">Solo necessari</button>
     </div>
   </div>
-
   <div class="lightbox" id="lightbox">
     <span class="close">×</span>
     <img class="lightbox-img" src="" alt="">
   </div>
-
   <script>
     const banner = document.getElementById('cookie-banner');
     if (!localStorage.getItem('cookieConsent')) {
       setTimeout(() => { banner.style.display = 'flex'; }, 800);
     }
-
     function acceptCookies() {
       localStorage.setItem('cookieConsent', 'granted');
       gtag('consent', 'update', { 'analytics_storage': 'granted' });
       banner.style.display = 'none';
       location.reload(); 
     }
-
     function rejectCookies() {
       localStorage.setItem('cookieConsent', 'denied');
       banner.style.display = 'none';
     }
-
     (function(){
+      const ov = document.getElementById('page-transition');
       const header = document.querySelector('.site-header');
       const menuBtn = document.querySelector('.menu-toggle');
       if (menuBtn) { menuBtn.addEventListener('click', () => { header.classList.toggle('open'); }); }
@@ -400,7 +288,6 @@
         if (mats.includes('F')) { const c = document.createElement('span'); c.className='chip F'; c.textContent='Ferro'; label.appendChild(c); }
         if (mats.includes('P')) { const c = document.createElement('span'); c.className='chip P'; c.textContent='PVC'; label.appendChild(c); }
       });
-
       const filterButtons = document.querySelectorAll('.filter-btn');
       filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -414,7 +301,6 @@
           });
         });
       });
-
       document.querySelectorAll('.product img').forEach(img=>{
         img.addEventListener('click', ()=>{
           const lb = document.getElementById('lightbox');
@@ -425,6 +311,26 @@
       document.querySelector('.lightbox .close').addEventListener('click', ()=>{
         document.getElementById('lightbox').style.display = 'none';
       });
+
+      function canUseTransition() {
+        if (!ov) return false;
+        const style = window.getComputedStyle(ov);
+        return style.display !== 'none';
+      }
+      if (canUseTransition()) {
+        ov.style.backgroundImage = "url('foto_aziendale.jpg')";
+        document.querySelectorAll('.main-nav a').forEach(a => {
+          a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            if (href && href !== '#' && !href.startsWith('http')) {
+              e.preventDefault();
+              header.classList.remove('open');
+              ov.classList.add('active');
+              setTimeout(() => { location.href = href; }, 600);
+            }
+          });
+        });
+      }
     })();
   </script>
 </body>
