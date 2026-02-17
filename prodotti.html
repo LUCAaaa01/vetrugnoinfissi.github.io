@@ -151,6 +151,9 @@
         <div class="product"><img src="imA33.webp" alt="Infisso"><div class="product-label"></div></div>
         <div class="product"><img src="imF34.webp" alt="Infisso"><div class="product-label"></div></div>
         <div class="product"><img src="imA47.webp" alt="Infisso"><div class="product-label"></div></div>
+        <div class="product"><img src="imF47.webp" alt="Infisso"><div class="product-label"></div></div>
+        <div class="product"><img src="imF48.webp" alt="Infisso"><div class="product-label"></div></div>
+        <div class="product"><img src="imA49.webp" alt="Infisso"><div class="product-label"></div></div>
         <div class="product"><img src="imP8.webp" alt="Infisso"><div class="product-label"></div></div>
         <div class="product"><img src="imA41.webp" alt="Infisso"><div class="product-label"></div></div>
         <div class="product"><img src="imF45.webp" alt="Infisso"><div class="product-label"></div></div>
@@ -274,10 +277,11 @@
       banner.style.display = 'none';
       location.reload(); 
     }
-    function rejectCookies() {
+   function rejectCookies() {
       localStorage.setItem('cookieConsent', 'denied');
       banner.style.display = 'none';
     }
+
     (function(){
       const ov = document.getElementById('page-transition');
       const header = document.querySelector('.site-header');
@@ -285,8 +289,16 @@
       if (menuBtn) { menuBtn.addEventListener('click', () => { header.classList.toggle('open'); }); }
       
       const products = document.querySelectorAll('.product');
+
+      // Ciclo unico per impostare Lazy Loading e preparare i filtri
       products.forEach(card => {
         const img = card.querySelector('img');
+        if (!img) return;
+
+        // Imposta il caricamento pigro per risparmiare MB
+        img.setAttribute('loading', 'lazy');
+
+        // Logica per estrarre i materiali dal nome del file (A, F, P)
         const src = img.getAttribute('src');
         const match = src.match(/^im([AFP]+)\d+/);
         let mats = [];
@@ -296,12 +308,17 @@
           if (code.includes('F')) mats.push('F');
           if (code.includes('P')) mats.push('P');
         }
+        
         card.dataset.materials = mats.join(',');
         const label = card.querySelector('.product-label');
+        
+        // Crea i bollini colorati sotto le foto
         if (mats.includes('A')) { const c = document.createElement('span'); c.className='chip A'; c.textContent='Alluminio'; label.appendChild(c); }
         if (mats.includes('F')) { const c = document.createElement('span'); c.className='chip F'; c.textContent='Ferro'; label.appendChild(c); }
         if (mats.includes('P')) { const c = document.createElement('span'); c.className='chip P'; c.textContent='PVC'; label.appendChild(c); }
       });
+
+      // Gestione dei pulsanti Filtro
       const filterButtons = document.querySelectorAll('.filter-btn');
       filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -349,4 +366,3 @@
   </script>
 </body>
 </html>
-
